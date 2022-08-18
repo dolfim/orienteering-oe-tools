@@ -30,6 +30,21 @@ Append the IOF Eventor registrations to the CVS file exported from GO2OL.
 python3 add_eventor_entries.py --eventor-entries entries_8._National_Orienteering_Middle.xml --oe-entries 8__Nationaler_OL__registrations_oe2010.csv --output 8naz_entries_go2ol_eventor.csv
 ```
 
+### Import late registrations
+
+Add late registrations from a table containing SOLV-nr, Class and (optional) SI-Card.
+The rest of the athlete's details is imported from the SOLV Läufer-DB.
+
+TODO
+
+
+### Add missing IOF ID
+
+Assign the missing IOF ID from a manually curated list.
+
+TODO
+
+
 ### Define start blocks for reverse IOF ranking
 
 This script is creating blocks of size `BLOCK_SIZE=10` for drawing the start lists
@@ -40,3 +55,14 @@ The best athletes will be in the block stating last.
 ```shell
 python define_wre_start_blocks.py --oe-entries 8naz_entries_go2ol_eventor.csv --men-ranking data/iof_ranking_MEN_F_18-08-2022.csv --women-ranking data/iof_ranking_WOMEN_F_18-08-2022.csv --output 8naz_entries_go2ol_eventor_rank.csv
 ```
+
+### Assign a unique startnr among multiple events
+
+TODO
+
+
+### Combine events for printing startnr
+
+After the start lists are generated in OE.
+
+TODO
