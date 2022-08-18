@@ -43,8 +43,9 @@ python add_late_entries.py --oe-entries 8__Nationaler_OL__registrations_oe2010.c
 
 Assign the missing IOF ID from a manually curated list.
 
-TODO
-
+```shell
+python fix_missing_iof.py --oe-entries 8__Nationaler_OL__registrations_oe2010.csv --missing-iof missing_iof_id_36.xlsx  --output 8naz_entries_go2ol_eventor_late_ioffix.csv
+```
 
 ### Define start blocks for reverse IOF ranking
 
