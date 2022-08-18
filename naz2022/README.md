@@ -29,3 +29,14 @@ Append the IOF Eventor registrations to the CVS file exported from GO2OL.
 ```shell
 python3 add_eventor_entries.py --eventor-entries entries_8._National_Orienteering_Middle.xml --oe-entries 8__Nationaler_OL__registrations_oe2010.csv --output 8naz_entries_go2ol_eventor.csv
 ```
+
+### Define start blocks for reverse IOF ranking
+
+This script is creating blocks of size `BLOCK_SIZE=10` for drawing the start lists
+according to WRE regulations.
+
+The best athletes will be in the block stating last.
+
+```shell
+python define_wre_start_blocks.py --oe-entries 8naz_entries_go2ol_eventor.csv --men-ranking data/iof_ranking_MEN_F_18-08-2022.csv --women-ranking data/iof_ranking_WOMEN_F_18-08-2022.csv --output 8naz_entries_go2ol_eventor_rank.csv
+```
