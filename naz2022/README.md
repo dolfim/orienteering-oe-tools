@@ -3,7 +3,7 @@
 This is a collection of tools used to organize the Orienteering competitions
 in Campra (TI) on 27th and 28th August 2022.
 
-Event website: https://naz2022.o-92.ch/index.php/it/
+Event website: https://naz2022.o-92.ch/
 
 ### Competition details
 
