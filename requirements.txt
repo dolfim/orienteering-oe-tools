@@ -1,0 +1,4 @@
+typer
+xlrd # supports old-style Excel files (.xls)
+openpyxl # supports newer Excel file formats
+pandas

@@ -35,8 +35,9 @@ python3 add_eventor_entries.py --eventor-entries entries_8._National_Orienteerin
 Add late registrations from a table containing SOLV-nr, Class and (optional) SI-Card.
 The rest of the athlete's details is imported from the SOLV Läufer-DB.
 
-TODO
-
+```shell
+python add_late_entries.py --oe-entries 8__Nationaler_OL__registrations_oe2010.csv --solv-db data/solv-competitors.csv --late-entries Iscrizioni_tardive.xlsx  --sheet-name Sabato --output 8naz_entries_go2ol_eventor_late.csv
+```
 
 ### Add missing IOF ID
 
