@@ -69,7 +69,7 @@ Assign a common start number among multiple events, using the following rules:
 - Bedise Elite, all other classes are sorted according to the SOLV class number
 - Athletes are identified among events by the tuple {Lastname, Givenname, Birth year, Class}
 
-````shell
+```shell
 python define_common_startnr.py data/8__Nationaler_OL__registrations_oe2010.csv data/9__Nationaler_OL__registrations_oe2010.csv
 ```
 
