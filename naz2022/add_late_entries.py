@@ -13,6 +13,7 @@ CSV_OUTPUT_ENCODING = 'ISO-8859-1'
 IOFID_FIELD = "Num3"
 SOLVNR_FIELD = "Datenbank Id"
 SICARD_FIELD = "Chipnr"
+START_REGION_FIELD = "Num1"
 INDEX_COLS = (SICARD_FIELD, SOLVNR_FIELD, IOFID_FIELD)
 
 
@@ -44,6 +45,28 @@ ENTRY_DB_FIELDS = (
     # "Startgeld",
     # "Bezahlt",
 )
+
+BLOCK_DEFAULT = 5
+BLOCKS_MAPPING = {
+    "Sabato": { # From https://o-tools.swiss-orienteering.ch/plan/unique_id/11004
+        "101": 7,
+        "102": 5,
+        "103": 5,
+        "104": 3,
+        "105": 3,
+        "106": 7,
+        "107": 3,
+    },
+    "Domenica": { # From https://o-tools.swiss-orienteering.ch/plan/unique_id/11006
+        "101": 5,
+        "102": 3,
+        "103": 7,
+        "104": 5,
+        "105": 7,
+        "106": 3,
+        "107": 7,
+    },
+}
 
 def main(
     late_input_filename: Path=typer.Option(..., "--late-entries", help="File Excel late entries"),
@@ -88,6 +111,8 @@ def main(
         if entry["SOLV-nr"] and entry["SOLV-nr"] in solv_db:
             typer.secho(f"Athlete {entry['SOLV-nr']} {entry['Cognome']} {entry['Nome']} found in SOLV DB", fg=typer.colors.GREEN)
             db_entry = solv_db[entry["SOLV-nr"]]
+            startRegion = db_entry["Num1"]
+            startBlock = BLOCKS_MAPPING[sheet_name].get(startRegion, BLOCK_DEFAULT)
             row = {
                 k: db_entry[k]
                 for k in ENTRY_DB_FIELDS
@@ -96,6 +121,7 @@ def main(
                 "Startgeld": entry["Importo"],
                 "Kurz": entry["Cat"],
                 "Startgeld": entry["Importo"],
+                "Block": str(startBlock),
             }
             if not pd.isna(entry["SI-Card"]):
                 late_entry[SICARD_FIELD] = entry["SI-Card"]
