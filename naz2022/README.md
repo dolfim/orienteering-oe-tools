@@ -58,10 +58,20 @@ The best athletes will be in the block stating last.
 python define_wre_start_blocks.py --oe-entries 8naz_entries_go2ol_eventor.csv --men-ranking data/iof_ranking_MEN_F_18-08-2022.csv --women-ranking data/iof_ranking_WOMEN_F_18-08-2022.csv --output 8naz_entries_go2ol_eventor_rank.csv
 ```
 
-### Assign a unique startnr among multiple events
+### Assign a common startnr among multiple events
 
-TODO
+Assign a common start number among multiple events, using the following rules:
 
+- Elite classes `ELITE_CLASSES = ("HE", "H20", "DE", "D20")` will get the lowest numbers
+- All other classes will start at the next hundred. If there are 123 elite athletes, the next
+  classes will start with 201
+- Drawing within a class is random
+- Bedise Elite, all other classes are sorted according to the SOLV class number
+- Athletes are identified among events by the tuple {Lastname, Givenname, Birth year, Class}
+
+````shell
+python define_common_startnr.py data/8__Nationaler_OL__registrations_oe2010.csv data/9__Nationaler_OL__registrations_oe2010.csv
+```
 
 ### Combine events for printing startnr
 
