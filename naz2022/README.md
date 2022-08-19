@@ -73,6 +73,20 @@ Assign a common start number among multiple events, using the following rules:
 python define_common_startnr.py data/8__Nationaler_OL__registrations_oe2010.csv data/9__Nationaler_OL__registrations_oe2010.csv
 ```
 
+---
+
+All the steps above are concatenated via the script `prepare_entries.sh`.
+This script will produce the following final files:
+
+```shell
+$ ./prepare_entries.sh
+...
+Writing output to 8naz_entries_final_startnr.csv
+Writing output to 9naz_entries_final_startnr.csv
+```
+
+---
+
 ### Combine events for printing startnr
 
 After the start lists are generated in OE.
