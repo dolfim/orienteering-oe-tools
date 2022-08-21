@@ -10,8 +10,8 @@ GO2OL_9NAZ_ENTRIES="${DATA_ROOT}/9__Nationaler_OL__registrations_oe2010.csv"
 EVENTOR_9NAZ_ENTRIES="${DATA_ROOT}/entries_9._National_Orienteering_Long-0820.xml"
 GO2OL_9NAZ_NOIOF="${DATA_ROOT}/missing_iof_id_35.xlsx"
 
-RANKING_MEN="${DATA_ROOT}/iof_ranking_MEN_F_19-08-2022.csv"
-RANKING_WOMEN="${DATA_ROOT}/iof_ranking_WOMEN_F_19-08-2022.csv"
+RANKING_MEN="${DATA_ROOT}/iof_ranking_MEN_F_20-08-2022.csv"
+RANKING_WOMEN="${DATA_ROOT}/iof_ranking_WOMEN_F_20-08-2022.csv"
 
 LATE_ENTRIES="${DATA_ROOT}/Iscrizioni tardive.xlsx"
 
