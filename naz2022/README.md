@@ -87,6 +87,29 @@ Writing output to 9naz_entries_final_startnr.csv
 
 ---
 
+### Update start block with new WRE list
+
+If we have to update the WRE start block, we proceed as
+1. Export from OE the latest version of the competition. Select only the Elite classes.
+2. Run again the `define_wre_start_blocks.py` script with the new list
+3. Import as new registration
+4. Manually or automatically regerate the start list for these categories.
+
+If the OE export is in another language, modify this import line
+
+```diff
+22c22
+< from oe_columns.de import *
+---
+> from oe_columns.it import *
+```
+
+Run as:
+
+```shell
+python define_wre_start_blocks.py --oe-entries 8naz_liste_partenza_elite.csv --men-ranking data/iof_ranking_MEN_F_18-08-2022.csv --women-ranking data/iof_ranking_WOMEN_F_18-08-2022.csv --output 8naz_elite_blocks.csv
+```
+
 ### Combine events for printing startnr
 
 After the start lists are generated in OE.

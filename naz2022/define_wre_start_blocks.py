@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 
 import csv
-import enum
+import math
 from pathlib import Path
-import xml.etree.ElementTree as ET
 
 import typer
+
+import pandas as pd
+from rich.console import Console
+from rich.table import Table
+
+console = Console()
 
 
 CSV_INPUT_ENCODING = 'ISO-8859-1'
@@ -14,16 +19,13 @@ CSV_OUTPUT_ENCODING = 'ISO-8859-1'
 WRE_INPUT_ENCODING = 'UTF8'
 WRE_OUTPUT_ENCODING = 'UTF8'
 
-IOFID_FIELD = "Num3"
-SOLVNR_FIELD = "Datenbank Id"
-SICARD_FIELD = "Chipnr"
-CLASS_FIELD = "Kurz"
-BLOCK_FIELD = "Block"
+from oe_columns.it import *
 INDEX_COLS = (SICARD_FIELD, SOLVNR_FIELD, IOFID_FIELD)
 
 BLOCK_SIZE = 10
 MEN_CATEGORIES = ["H20", "HE"]
 WOMEN_CATEGORIES = ["D20", "DE"]
+
 
 def main(
     oe_input_filename: Path=typer.Option(..., "--oe-entries", help="File CSV con iscrizioni OE"),
@@ -56,7 +58,7 @@ def main(
             men_ranking_by_iof[row["IOF ID"]] = int(row["WRS Position"])
 
     typer.echo(f"Reading women ranking from CSV file {women_ranking}")
-    with open(men_ranking, encoding=WRE_INPUT_ENCODING) as csvfile:
+    with open(women_ranking, encoding=WRE_INPUT_ENCODING) as csvfile:
         reader = csv.DictReader(csvfile, dialect='excel', delimiter=';')
         
         women_ranking_by_iof = {}
@@ -64,6 +66,7 @@ def main(
             women_ranking_by_iof[row["IOF ID"]] = int(row["WRS Position"])
 
 
+    reportData = []
     for classesList, ranking_by_iof in ((MEN_CATEGORIES, men_ranking_by_iof), (WOMEN_CATEGORIES, women_ranking_by_iof)):
         for className in classesList:
             typer.secho(f"Processing class {className}...", fg=typer.colors.BLUE)
@@ -78,15 +81,33 @@ def main(
                         "block": 1,
                     })
             
-            classEntries.sort(key=lambda x: x["worldRank"], reverse=True)
-            currentBlock = 1
+
+            maxBlock = math.ceil((len(classEntries) / BLOCK_SIZE)) * 2 + 1
+            currentBlock = maxBlock
+            classEntries.sort(key=lambda x: x["worldRank"])
             for i, entry in enumerate(classEntries):
                 if i % BLOCK_SIZE == 0:
-                    currentBlock += 2
+                    currentBlock -= 2
                 entry["block"] = currentBlock
                 data[entry["ix"]][BLOCK_FIELD] = str(currentBlock)
-            typer.secho(f"Class {className} finished with block {currentBlock} and {len(classEntries)} entries.", fg=typer.colors.GREEN)
+                data[entry["ix"]][IOFRANK_FIELD] = str(entry["worldRank"])
+                data[entry["ix"]][DBRANK_FIELD] = str(entry["worldRank"])
+                reportData.append({
+                    "Class": className,
+                    "IOF ID": str(entry["iofId"]),
+                    "Name": f"{data[entry['ix']][FAMILY_NAME_FIELD]} {data[entry['ix']][GIVEN_NAME_FIELD]}",
+                    "Rank": str(entry["worldRank"]),
+                    "StartBlock": str(currentBlock),
+                })
 
+            typer.secho(f"Class {className} finished with block {currentBlock} from max block {maxBlock} and {len(classEntries)} entries.", fg=typer.colors.GREEN)
+
+    df = pd.DataFrame(reportData)
+    with pd.option_context('display.max_rows', None, 'display.max_columns', None):
+        print(df)
+    report_filename = output_filename.with_stem(f"{output_filename.stem}_report").with_suffix(".xlsx")
+    typer.echo(f"Writing report to {report_filename}")
+    df.to_excel(report_filename, index=False)
 
     typer.echo(f"Writing output to {output_filename}")
     with open(output_filename, 'w', encoding=CSV_OUTPUT_ENCODING) as csvfile:

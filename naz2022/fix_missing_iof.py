@@ -50,7 +50,7 @@ def main(
                 continue
             # print("ix", data_by_index[GO2OLID_FIELD][exportId])
             # print(data[data_by_index[GO2OLID_FIELD][exportId]])
-            data[data_by_index[GO2OLID_FIELD][exportId]][IOFID_FIELD] = entry["IOF ID"]
+            data[data_by_index[GO2OLID_FIELD][exportId]][IOFID_FIELD] = "{0:d}".format(int(entry["IOF ID"]))
         else:
             typer.secho(f"Athlete {entry['Nachname']} {entry['Vorname']} NOT FOUND", fg=typer.colors.RED)
 

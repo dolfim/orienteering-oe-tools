@@ -1,12 +1,13 @@
 #!/bin/bash
 
 DATA_ROOT="$HOME/Library/CloudStorage/OneDrive-Personal/CO/NazCampra2022/NazCampra2022 - IT/Iscrizioni"
+
 GO2OL_8NAZ_ENTRIES="${DATA_ROOT}/8__Nationaler_OL__registrations_oe2010.csv"
-EVENTOR_8NAZ_ENTRIES="${DATA_ROOT}/entries_8._National_Orienteering_Middle.xml"
+EVENTOR_8NAZ_ENTRIES="${DATA_ROOT}/entries_8._National_Orienteering_Middle-0820.xml"
 GO2OL_8NAZ_NOIOF="${DATA_ROOT}/missing_iof_id_36.xlsx"
 
 GO2OL_9NAZ_ENTRIES="${DATA_ROOT}/9__Nationaler_OL__registrations_oe2010.csv"
-EVENTOR_9NAZ_ENTRIES="${DATA_ROOT}/entries_9._National_Orienteering_Long.xml"
+EVENTOR_9NAZ_ENTRIES="${DATA_ROOT}/entries_9._National_Orienteering_Long-0820.xml"
 GO2OL_9NAZ_NOIOF="${DATA_ROOT}/missing_iof_id_35.xlsx"
 
 RANKING_MEN="${DATA_ROOT}/iof_ranking_MEN_F_19-08-2022.csv"
