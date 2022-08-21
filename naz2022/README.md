@@ -112,6 +112,7 @@ python define_wre_start_blocks.py --oe-entries 8naz_liste_partenza_elite.csv --m
 
 ### Combine events for printing startnr
 
-After the start lists are generated in OE.
+After the start lists are generated in OE, we combine the two OE export files into a single table
+which is used to print the start numbers.
 
-TODO
+python export_startnr_for_print.py --oe-input-1="8Naz_Liste_di_partenza.csv" --oe-input-2="9Naz_Liste_di_partenza.csv" --zero-1="12:00:00" --zero-2="09:00:00" --output NazCampra2022_Startnr.xlsx

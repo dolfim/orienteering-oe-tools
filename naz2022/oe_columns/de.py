@@ -8,3 +8,8 @@ CLASSNR_FIELD = "Katnr"
 BLOCK_FIELD = "Block"
 GIVEN_NAME_FIELD = "Vorname"
 FAMILY_NAME_FIELD = "Nachname"
+BIRTH_FIELD = "Jg"
+STARTNR_FIELD = "Stnr"
+START_FIELD = "Start"
+
+VACANCY_NAME = "Vakant"
